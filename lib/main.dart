@@ -53,7 +53,7 @@ class ProfileSection extends StatelessWidget {
         children: [
           const CircleAvatar(
             radius: 50,
-            backgroundImage: NetworkImage('https://via.placeholder.com/150'), // プロフィール画像のURL
+            backgroundImage: AssetImage('assets/images/my_icon.jpg'), // プロフィール画像のURL
           ),
           const SizedBox(height: 16),
           const Text(

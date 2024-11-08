@@ -27,7 +27,7 @@ class PortfolioPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Portfolio'),
+        title: const Text('しずくのポートフォリオ'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -57,12 +57,12 @@ class ProfileSection extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           const Text(
-            'Your Name',
+            '碇 穏空',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
           Text(
-            'Mobile Engineer & Student at Meiji University',
+            'I will be software developer &  am Student at Meiji.univ now',
             style: TextStyle(fontSize: 16, color: Colors.grey[600]),
             textAlign: TextAlign.center,
           ),
@@ -74,9 +74,8 @@ class ProfileSection extends StatelessWidget {
 
 class ProjectsSection extends StatelessWidget {
   final List<Project> projects = [
-    Project('Project 1', 'Description of Project 1'),
-    Project('Project 2', 'Description of Project 2'),
-    Project('Project 3', 'Description of Project 3'),
+    Project('ファイト日記', '個人開発として作ったアプリ。頑張れない人が頑張れるようになります。'),
+    Project('Motto Hotto', 'Tokyo Flutter Hackathon 2024 に参加した際に作成したアプリ。懇親会などの交流会を盛り上げられます。'),
   ];
 
   ProjectsSection({super.key});
@@ -140,11 +139,11 @@ class ContactSection extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 16),
-          Text('Email: your.email@example.com'),
+          Text('Email: shizup00417@gmail.com'),
           SizedBox(height: 8),
-          Text('LinkedIn: your-linkedin-profile'),
+          Text('X: @Shizufishing'),
           SizedBox(height: 8),
-          Text('GitHub: your-github-profile'),
+          Text('GitHub: https://github.com/I-Shizu'),
         ],
       ),
     );

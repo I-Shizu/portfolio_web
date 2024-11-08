@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'utils/launch_url.dart';
 
 void main() {
   runApp(const MyApp());
@@ -64,7 +64,7 @@ class ProfileSection extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'I will be software developer &  am Student at Meiji.univ now',
+            'I will be software developer &  am Student of Meiji.univ now',
             style: TextStyle(fontSize: 16, color: Colors.grey[600]),
             textAlign: TextAlign.center,
           ),
@@ -107,6 +107,7 @@ class ProjectsSection extends StatelessWidget {
 
 class ProjectCard extends StatelessWidget {
   final Project project;
+  final hackathonProjectUrl = 'https://flutter-hackathon-prd.web.app/';
 
   const ProjectCard({super.key, required this.project});
 
@@ -119,7 +120,7 @@ class ProjectCard extends StatelessWidget {
         subtitle: Text(project.description),
         trailing: const Icon(Icons.open_in_new),
         onTap: () {
-          // プロジェクトの詳細やリンクを追加できます
+          launchURL(hackathonProjectUrl);
         },
       ),
     );
@@ -156,7 +157,7 @@ class ContactSection extends StatelessWidget {
                     decoration: TextDecoration.underline,
                   ),
                   recognizer: TapGestureRecognizer()
-                    ..onTap = () => _launchURL('mailto:$email'),
+                    ..onTap = () => launchURL('mailto:$email'),
                 ),
               ],
             ),
@@ -173,7 +174,7 @@ class ContactSection extends StatelessWidget {
                     decoration: TextDecoration.underline,
                   ),
                   recognizer: TapGestureRecognizer()
-                    ..onTap = () => _launchURL(xUrl),
+                    ..onTap = () => launchURL(xUrl),
                 ),
               ],
             ),
@@ -190,7 +191,7 @@ class ContactSection extends StatelessWidget {
                     decoration: TextDecoration.underline,
                   ),
                   recognizer: TapGestureRecognizer()
-                    ..onTap = () => _launchURL(githubUrl),
+                    ..onTap = () => launchURL(githubUrl),
                 ),
               ],
             ),
@@ -199,19 +200,6 @@ class ContactSection extends StatelessWidget {
       ),
     );
   }
-
-  void _launchURL(String url) async {
-  final Uri uri = Uri.parse(url);
-  try {
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } else {
-      print('Could not launch $url');
-    }
-  } catch (e) {
-    print('Error occurred: $e');
-  }
-}
 }
 
 class Project {

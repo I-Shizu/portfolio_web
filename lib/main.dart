@@ -1,4 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'utils/launch_url.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +18,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: const PortfolioPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -27,7 +30,7 @@ class PortfolioPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Portfolio'),
+        title: const Text('しずくのポートフォリオ'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -53,16 +56,16 @@ class ProfileSection extends StatelessWidget {
         children: [
           const CircleAvatar(
             radius: 50,
-            backgroundImage: NetworkImage('https://via.placeholder.com/150'), // プロフィール画像のURL
+            backgroundImage: AssetImage('assets/images/my_icon.jpg'), // プロフィール画像のURL
           ),
           const SizedBox(height: 16),
           const Text(
-            'Your Name',
+            '碇 穏空',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
           Text(
-            'Mobile Engineer & Student at Meiji University',
+            'I will be software developer &  am Student of Meiji.univ now',
             style: TextStyle(fontSize: 16, color: Colors.grey[600]),
             textAlign: TextAlign.center,
           ),
@@ -74,9 +77,8 @@ class ProfileSection extends StatelessWidget {
 
 class ProjectsSection extends StatelessWidget {
   final List<Project> projects = [
-    Project('Project 1', 'Description of Project 1'),
-    Project('Project 2', 'Description of Project 2'),
-    Project('Project 3', 'Description of Project 3'),
+    Project('ファイト日記', '個人開発として作ったアプリ。頑張れない人が頑張れるようになります。'),
+    Project('Motto Hotto', 'Tokyo Flutter Hackathon 2024 に参加した際に作成したアプリ。懇親会などの交流会を盛り上げられます。'),
   ];
 
   ProjectsSection({super.key});
@@ -106,6 +108,7 @@ class ProjectsSection extends StatelessWidget {
 
 class ProjectCard extends StatelessWidget {
   final Project project;
+  final hackathonProjectUrl = 'https://flutter-hackathon-prd.web.app/';
 
   const ProjectCard({super.key, required this.project});
 
@@ -118,7 +121,7 @@ class ProjectCard extends StatelessWidget {
         subtitle: Text(project.description),
         trailing: const Icon(Icons.open_in_new),
         onTap: () {
-          // プロジェクトの詳細やリンクを追加できます
+          launchURL(hackathonProjectUrl);
         },
       ),
     );
@@ -128,9 +131,13 @@ class ProjectCard extends StatelessWidget {
 class ContactSection extends StatelessWidget {
   const ContactSection({super.key});
 
+  final String githubUrl = 'https://github.com/I-Shizu';
+  final String xUrl = 'https://twitter.com/Shizufishing';
+  final String email = 'shizup00417@gmail.com';
+
   @override
   Widget build(BuildContext context) {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,11 +147,56 @@ class ContactSection extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 16),
-          Text('Email: your.email@example.com'),
+          Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(text: 'Email: '),
+                TextSpan(
+                  text: email,
+                  style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => launchURL('mailto:$email'),
+                ),
+              ],
+            ),
+          ),
           SizedBox(height: 8),
-          Text('LinkedIn: your-linkedin-profile'),
+          Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(text: 'X: '),
+                TextSpan(
+                  text: '@Shizufishing',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => launchURL(xUrl),
+                ),
+              ],
+            ),
+          ),
           SizedBox(height: 8),
-          Text('GitHub: your-github-profile'),
+          Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(text: 'GitHub: '),
+                TextSpan(
+                  text: githubUrl,
+                  style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => launchURL(githubUrl),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

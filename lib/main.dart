@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: const PortfolioPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

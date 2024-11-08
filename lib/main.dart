@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -129,6 +130,8 @@ class ContactSection extends StatelessWidget {
   const ContactSection({super.key});
 
   final String githubUrl = 'https://github.com/I-Shizu';
+  final String xUrl = 'https://twitter.com/Shizufishing';
+  final String email = 'shizup00417@gmail.com';
 
   @override
   Widget build(BuildContext context) {
@@ -142,19 +145,55 @@ class ContactSection extends StatelessWidget {
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 16),
-          Text('Email: shizup00417@gmail.com'),
-          SizedBox(height: 8),
-          Text('X: @Shizufishing'),
-          SizedBox(height: 8),
-          InkWell(
-            child: Text(
-              'GitHub: $githubUrl',
-              style: TextStyle(
-                color: Colors.blue,
-                decoration: TextDecoration.underline,
-              ),
+          Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(text: 'Email: '),
+                TextSpan(
+                  text: email,
+                  style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => _launchURL('mailto:$email'),
+                ),
+              ],
             ),
-            onTap: () => _launchURL(githubUrl),
+          ),
+          SizedBox(height: 8),
+          Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(text: 'X: '),
+                TextSpan(
+                  text: '@Shizufishing',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => _launchURL(xUrl),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 8),
+          Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(text: 'GitHub: '),
+                TextSpan(
+                  text: githubUrl,
+                  style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => _launchURL(githubUrl),
+                ),
+              ],
+            ),
           ),
         ],
       ),

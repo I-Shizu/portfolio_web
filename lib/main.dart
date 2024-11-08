@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -127,9 +128,11 @@ class ProjectCard extends StatelessWidget {
 class ContactSection extends StatelessWidget {
   const ContactSection({super.key});
 
+  final String githubUrl = 'https://github.com/I-Shizu';
+
   @override
   Widget build(BuildContext context) {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,11 +146,33 @@ class ContactSection extends StatelessWidget {
           SizedBox(height: 8),
           Text('X: @Shizufishing'),
           SizedBox(height: 8),
-          Text('GitHub: https://github.com/I-Shizu'),
+          InkWell(
+            child: Text(
+              'GitHub: $githubUrl',
+              style: TextStyle(
+                color: Colors.blue,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+            onTap: () => _launchURL(githubUrl),
+          ),
         ],
       ),
     );
   }
+
+  void _launchURL(String url) async {
+  final Uri uri = Uri.parse(url);
+  try {
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      print('Could not launch $url');
+    }
+  } catch (e) {
+    print('Error occurred: $e');
+  }
+}
 }
 
 class Project {

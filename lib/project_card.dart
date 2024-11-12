@@ -4,8 +4,6 @@ import 'package:portfolio_web/utils/launch_url.dart';
 
 class ProjectCard extends StatelessWidget {
   final Project project;
-  final fightMemoryUrl = 'https://github.com/I-Shizu/fight_memory';
-  final hackathonProjectUrl = 'https://github.com/I-Shizu/portfolio_web';
 
   const ProjectCard({super.key, required this.project});
 
@@ -15,7 +13,7 @@ class ProjectCard extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: InkWell(
         onTap: () {
-          launchURL(hackathonProjectUrl);
+          launchURL(project.projectUrl);
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +26,7 @@ class ProjectCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Image.asset(
-                'assets/images/hackathon_app.png', 
+                project.imagePath, 
                 height: 400, // 高さを調整
                 fit: BoxFit.cover,
               ),

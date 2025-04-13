@@ -1,6 +1,6 @@
 # portfolio_web
 
-This is My Portfolio Website.
+Flutter webとFirebase Hostingを利用して作成しています。
 
 ## Getting Started
 
